@@ -1,4 +1,5 @@
 import React from "react";
+
 // Assuming Card, CardContent, Tabs, TabsList, TabsTrigger, TabsContent are available
 // in the environment (e.g., via shadcn/ui setup)
 // For a standalone example, these would typically be defined or imported from a UI library.
@@ -54,13 +55,15 @@ const TabsContent = ({ value, children }) => <div>{children}</div>;
 export default function App() {
   return (
     <div className="p-6 space-y-6 bg-gradient-to-br from-blue-50 to-white min-h-screen font-sans">
-      {/* Tailwind CSS CDN for styling */}
-      <script src="https://cdn.tailwindcss.com"></script>
-      {/* Inter font from Google Fonts */}
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      {/*
+        FIX 1: Removed invalid <script> and <link> tags.
+        These tags are not valid inside a React component's return statement.
+        They should be placed in the <head> of the main index.html file for your project.
+      */}
 
       <style>{`
         body {
+          /* This font would be loaded from the <link> tag in index.html */
           font-family: 'Inter', sans-serif;
         }
         pre {
@@ -115,10 +118,11 @@ export default function App() {
                   Time = O(Loops/Recursion) × O(Operations Inside)
                 </pre>
                 <p className="text-base mt-3 font-semibold text-gray-800">🔁 When you see:</p>
-                <ul className="list-disc text-base space-y-2"> {/* Removed list-inside to manage with custom CSS */}
+                {/* FIX 2: Replaced LaTeX-style math with Unicode characters for correct rendering. */}
+                <ul className="list-disc text-base space-y-2">
                   <li><strong>Loops:</strong> Count how many times they run</li>
                   <li><strong>Nested Loops:</strong> Multiply their counts</li>
-                  <li><strong>Logarithmic Growth:</strong> If loop doubles or halves $\rightarrow$ O(log n)</li>
+                  <li><strong>Logarithmic Growth:</strong> If loop doubles or halves → O(log n)</li>
                   <li>
                     <strong>Recursive Functions:</strong>
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
@@ -221,9 +225,9 @@ export default function App() {
                   📌 Golden Formula in Action
                 </h3>
                 <pre className="text-sm bg-gray-100 p-4 rounded-lg overflow-x-auto border border-gray-200">
-{`for (i = 0; i < n; i++)         // O(n)
-    for (j = 1; j < n; j *= 2)  // O(log n)
-        arr[j] = j + 1;         // O(1)
+{`for (i = 0; i < n; i++)      // O(n)
+  for (j = 1; j < n; j *= 2) // O(log n)
+    arr[j] = j + 1;          // O(1)
 
 // Total:`}
                 </pre>
@@ -240,8 +244,8 @@ export default function App() {
                 <h3 className="text-xl font-semibold text-indigo-600 mb-2">
                   🌟 Summary Cheat Rule:
                 </h3>
-                <ol className="list-decimal text-base space-y-2"> {/* Removed ml-4 to manage with custom CSS */}
-                  <li>Count the biggest loop/recursion depth $\rightarrow$ that's your base</li>
+                <ol className="list-decimal text-base space-y-2">
+                  <li>Count the biggest loop/recursion depth → that's your base</li>
                   <li>Multiply if loops are nested</li>
                   <li>Add if operations are sequential</li>
                   <li>Check memory used: arrays, recursion, etc.</li>
@@ -277,11 +281,12 @@ export default function App() {
                   ["O(log n)", "Logarithmic", "Binary Search"],
                   ["O(n)", "Linear", "Single loop"],
                   ["O(n log n)", "Linearithmic", "Merge Sort"],
-                  ["O(n^2)", "Quadratic", "Nested loops"],
-                  ["O(2^n)", "Exponential", "Recursive Fibonacci"],
+                  ["O(n²)", "Quadratic", "Nested loops"],
+                  ["O(2ⁿ)", "Exponential", "Recursive Fibonacci"],
                   ["O(n!)", "Factorial", "Permutations"]
-                ].map(([o, g, ex], i) => (
-                  <tr key={i} className="even:bg-gray-50 border-t border-gray-200">
+                // FIX 3: Changed key from index to a unique string `o` for React best practices.
+                ].map(([o, g, ex]) => (
+                  <tr key={o} className="even:bg-gray-50 border-t border-gray-200">
                     <td className="p-3 border border-gray-200 text-center font-mono">{o}</td>
                     <td className="p-3 border border-gray-200 text-center">{g}</td>
                     <td className="p-3 border border-gray-200 text-center">{ex}</td>
@@ -311,9 +316,9 @@ export default function App() {
                   ["O(1)", "Constant space", "int sum = 0;"],
                   ["O(n)", "Linear space", "Copy of array"],
                   ["O(log n)", "Log space", "Recursive binary search"],
-                  ["O(n^2)", "2D matrix storage", "Adjacency matrix"]
-                ].map(([s, d, ex], i) => (
-                  <tr key={i} className="even:bg-gray-50 border-t border-gray-200">
+                  ["O(n²)", "Quadratic space", "Adjacency matrix"]
+                ].map(([s, d, ex]) => (
+                  <tr key={s} className="even:bg-gray-50 border-t border-gray-200">
                     <td className="p-3 border border-gray-200 text-center font-mono">{s}</td>
                     <td className="p-3 border border-gray-200 text-center">{d}</td>
                     <td className="p-3 border border-gray-200 text-center">{ex}</td>
@@ -330,7 +335,7 @@ export default function App() {
             <h2 className="text-2xl font-semibold text-indigo-600 mb-4">
               🔁 Time Complexity Flowchart
             </h2>
-            <ol className="list-decimal text-base space-y-3"> {/* Removed list-inside to manage with custom CSS */}
+            <ol className="list-decimal text-base space-y-3">
               <li>Start Analysis</li>
               <li>Check for loops or recursion</li>
               <li>Count loop levels or recursive calls</li>
@@ -348,11 +353,11 @@ export default function App() {
             </h2>
             <Tabs defaultValue="n">
               <TabsList className="flex flex-wrap justify-center mb-6">
-                <TabsTrigger value="1" className="flex-grow sm:flex-none">O(1)</TabsTrigger>
-                <TabsTrigger value="n" className="flex-grow sm:flex-none">O(n)</TabsTrigger>
-                <TabsTrigger value="logn" className="flex-grow sm:flex-none">O(log n)</TabsTrigger>
-                <TabsTrigger value="nlogn" className="flex-grow sm:flex-none">O(n log n)</TabsTrigger>
-                <TabsTrigger value="n2" className="flex-grow sm:flex-none">O(n²)</TabsTrigger>
+                <TabsTrigger value="1">O(1)</TabsTrigger>
+                <TabsTrigger value="n">O(n)</TabsTrigger>
+                <TabsTrigger value="logn">O(log n)</TabsTrigger>
+                <TabsTrigger value="nlogn">O(n log n)</TabsTrigger>
+                <TabsTrigger value="n2">O(n²)</TabsTrigger>
               </TabsList>
               <TabsContent value="1">
                 <pre className="text-sm bg-gray-100 p-4 rounded-lg overflow-x-auto border border-gray-200">
@@ -373,7 +378,7 @@ export default function App() {
 {`int binarySearch(int arr[], int n, int x) {
   int l = 0, h = n - 1;
   while (l <= h) {
-    int m = l + (h - l) / 2; // Prevents overflow for large l, h
+    int m = l + (h - l) / 2; // Prevents overflow
     if (arr[m] == x) return m;
     if (arr[m] < x) l = m + 1;
     else h = m - 1;
@@ -417,11 +422,11 @@ void mergeSort(int arr[], int l, int r) {
             <h2 className="text-2xl font-semibold text-indigo-600 mb-4">
               💡 Tips & Practice Ideas
             </h2>
-            <ul className="list-disc text-base space-y-3"> {/* Removed list-inside to manage with custom CSS */}
-              <li>Nested loops &rarr; Multiply (O(n²))</li>
-              <li>Sequential code &rarr; Add (O(n + m))</li>
-              <li>Recursive? &rarr; Use Master Theorem (for divide and conquer)</li>
-              <li>Ignore constants (O(2n) &rarr; O(n))</li>
+            <ul className="list-disc text-base space-y-3">
+              <li>Nested loops → Multiply (O(n²))</li>
+              <li>Sequential code → Add (O(n + m))</li>
+              <li>Recursive? → Use Master Theorem (for divide and conquer)</li>
+              <li>Ignore constants (O(2n) → O(n))</li>
               <li>Space = variables + call stack</li>
               <li>Practice: Print pairs (O(n²)), Check if array is sorted (O(n)), Implement Merge Sort (O(n log n))</li>
               <li>Example: Reverse Linked List: Time O(n), Space O(1)</li>
@@ -469,45 +474,46 @@ for (i = n / 2; i <= n; i++) {
 
               <div>
                 <h3 className="text-lg font-medium text-gray-800 mb-2">Time Complexity Analysis:</h3>
-                <ul className="list-disc text-base space-y-2"> {/* Removed list-inside to manage with custom CSS */}
+                <ul className="list-disc text-base space-y-2">
                   <li>
                     <strong>Step 1: Outer Loop (i)</strong>
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
 {`for (i = n / 2; i <= n; i++)`}
                     </pre>
-                    <p className="text-sm">Starts at `i = n / 2`</p> {/* Removed ml-4 */}
-                    <p className="text-sm">Ends at `i = n`</p> {/* Removed ml-4 */}
-                    <p className="text-sm">Runs for approximately `n/2` iterations</p> {/* Removed ml-4 */}
-                    <p className="text-sm"><strong>Time Complexity: O(n)</strong></p> {/* Removed ml-4 */}
+                    {/* FIX 4: Removed redundant `ml-4` class, as custom CSS already handles indentation. */}
+                    <p className="text-sm">Starts at `i = n / 2`</p>
+                    <p className="text-sm">Ends at `i = n`</p>
+                    <p className="text-sm">Runs for approximately `n/2` iterations</p>
+                    <p className="text-sm"><strong>Time Complexity: O(n)</strong></p>
                   </li>
                   <li>
                     <strong>Step 2: Inner Loop (j)</strong>
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
 {`for (j = 2; j <= n; j = j * 2)`}
                     </pre>
-                    <p className="text-sm">Multiplicative loop (`j = j * 2`)</p> {/* Removed ml-4 */}
-                    <p className="text-sm">Runs approximately $\log_2(n)$ times</p> {/* Removed ml-4 */}
-                    <p className="text-sm"><strong>Time Complexity: O(log n)</strong></p> {/* Removed ml-4 */}
+                    <p className="text-sm">Multiplicative loop (`j = j * 2`)</p>
+                    <p className="text-sm">Runs approximately log₂(n) times</p>
+                    <p className="text-sm"><strong>Time Complexity: O(log n)</strong></p>
                   </li>
                   <li>
                     <strong>Step 3: Operation inside Inner Loop</strong>
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
 {`k = k + n / 2;`}
                     </pre>
-                    <p className="text-sm">Constant time operation: O(1)</p> {/* Removed ml-4 */}
+                    <p className="text-sm">Constant time operation: O(1)</p>
                   </li>
                   <li>
                     <strong>Step 4: Total Time Complexity</strong>
-                    <p className="text-sm">Outer loop: O(n)</p> {/* Removed ml-4 */}
-                    <p className="text-sm">Inner loop: O(log n)</p> {/* Removed ml-4 */}
-                    <p className="text-sm"><strong>Total: O(n * log n) = O(n log n)</strong></p> {/* Removed ml-4 */}
+                    <p className="text-sm">Outer loop: O(n)</p>
+                    <p className="text-sm">Inner loop: O(log n)</p>
+                    <p className="text-sm"><strong>Total: O(n * log n) = O(n log n)</strong></p>
                   </li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-lg font-medium text-gray-800 mb-2">Space Complexity Analysis:</h3>
-                <ul className="list-disc text-base space-y-2"> {/* Removed list-inside to manage with custom CSS */}
+                <ul className="list-disc text-base space-y-2">
                   <li>Variables used: `i`, `j`, `k`, and `n` (all `int`)</li>
                   <li>No arrays or dynamic memory allocation</li>
                   <li><strong>Space Complexity: O(1) (constant space)</strong></li>
@@ -518,59 +524,57 @@ for (i = n / 2; i <= n; i++) {
                 <h3 className="text-lg font-medium text-gray-800 mb-2">Flowchart:</h3>
                 <pre className="text-sm bg-gray-100 p-4 rounded-lg overflow-x-auto border border-gray-200">
 {`+-----------------------------+
-|          Start             |
+|           Start             |
 +-----------------------------+
-            |
-            v
+              |
+              v
 +-----------------------------+
 | Initialize i = n/2, k = 0   |
 +-----------------------------+
-            |
-            v
+              |
+              v
 +-----------------------------+
-| i <= n? (Outer Loop Check) |
+| i <= n? (Outer Loop Check)  |
 +-----------------------------+
-     | Yes         | No
-     v             |
+      | Yes         | No
+      v             |
 +-----------------------------+
-| j = 2;           |
-| j <= n? (Inner)  |
+| j = 2;                      |
+| j <= n? (Inner)             |
 +-----------------------------+
-     | Yes         | No
-     v             |
+      | Yes         | No
+      v             |
 +-----------------------------+
-| k = k + n/2       |
+| k = k + n/2                 |
 +-----------------------------+
-     |
-     v
+      |
+      v
 +-----------------------------+
-| j = j * 2         |
+| j = j * 2                   |
 +-----------------------------+
-     |
-     v
+      |
+      v
 (back to inner loop condition)
-     |
-     .
-     .
-     .
-     |
+      .
+      .
+      .
+      |
 Once inner loop ends
-     |
-     v
+      |
+      v
 +-----------------------------+
-| i = i + 1          |
+| i = i + 1                   |
 +-----------------------------+
-     |
-     v
+      |
+      v
 (back to outer loop condition)
-     |
-     .
-     .
-     .
-     |
+      .
+      .
+      .
+      |
 Once outer loop ends
-     |
-     v
+      |
+      v
 +-----------------------------+
 |             End             |
 +-----------------------------+`}
