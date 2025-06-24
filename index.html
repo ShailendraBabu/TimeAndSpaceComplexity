@@ -79,6 +79,10 @@ export default function App() {
         ul.list-disc li, ol.list-decimal li {
             margin-bottom: 0.5rem; /* Space between list items */
         }
+        /* Remove extra left margin from paragraphs inside list items if parent ul/ol provides it */
+        ul.list-disc li p, ol.list-decimal li p {
+            margin-left: 0;
+        }
       `}</style>
 
       <h1 className="text-4xl font-bold text-center text-blue-800 mb-8">
@@ -111,7 +115,7 @@ export default function App() {
                   Time = O(Loops/Recursion) × O(Operations Inside)
                 </pre>
                 <p className="text-base mt-3 font-semibold text-gray-800">🔁 When you see:</p>
-                <ul className="list-disc text-base space-y-2"> {/* Removed ml-4 to manage with custom CSS */}
+                <ul className="list-disc text-base space-y-2"> {/* Removed list-inside to manage with custom CSS */}
                   <li><strong>Loops:</strong> Count how many times they run</li>
                   <li><strong>Nested Loops:</strong> Multiply their counts</li>
                   <li><strong>Logarithmic Growth:</strong> If loop doubles or halves $\rightarrow$ O(log n)</li>
@@ -471,32 +475,32 @@ for (i = n / 2; i <= n; i++) {
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
 {`for (i = n / 2; i <= n; i++)`}
                     </pre>
-                    <p className="text-sm ml-4">Starts at `i = n / 2`</p>
-                    <p className="text-sm ml-4">Ends at `i = n`</p>
-                    <p className="text-sm ml-4">Runs for approximately `n/2` iterations</p>
-                    <p className="text-sm ml-4"><strong>Time Complexity: O(n)</strong></p>
+                    <p className="text-sm">Starts at `i = n / 2`</p> {/* Removed ml-4 */}
+                    <p className="text-sm">Ends at `i = n`</p> {/* Removed ml-4 */}
+                    <p className="text-sm">Runs for approximately `n/2` iterations</p> {/* Removed ml-4 */}
+                    <p className="text-sm"><strong>Time Complexity: O(n)</strong></p> {/* Removed ml-4 */}
                   </li>
                   <li>
                     <strong>Step 2: Inner Loop (j)</strong>
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
 {`for (j = 2; j <= n; j = j * 2)`}
                     </pre>
-                    <p className="text-sm ml-4">Multiplicative loop (`j = j * 2`)</p>
-                    <p className="text-sm ml-4">Runs approximately $\log_2(n)$ times</p>
-                    <p className="text-sm ml-4"><strong>Time Complexity: O(log n)</strong></p>
+                    <p className="text-sm">Multiplicative loop (`j = j * 2`)</p> {/* Removed ml-4 */}
+                    <p className="text-sm">Runs approximately $\log_2(n)$ times</p> {/* Removed ml-4 */}
+                    <p className="text-sm"><strong>Time Complexity: O(log n)</strong></p> {/* Removed ml-4 */}
                   </li>
                   <li>
                     <strong>Step 3: Operation inside Inner Loop</strong>
                     <pre className="text-sm bg-gray-50 p-2 mt-1 rounded-md border border-gray-100">
 {`k = k + n / 2;`}
                     </pre>
-                    <p className="text-sm ml-4">Constant time operation: O(1)</p>
+                    <p className="text-sm">Constant time operation: O(1)</p> {/* Removed ml-4 */}
                   </li>
                   <li>
                     <strong>Step 4: Total Time Complexity</strong>
-                    <p className="text-sm ml-4">Outer loop: O(n)</p>
-                    <p className="text-sm ml-4">Inner loop: O(log n)</p>
-                    <p className="text-sm ml-4"><strong>Total: O(n * log n) = O(n log n)</strong></p>
+                    <p className="text-sm">Outer loop: O(n)</p> {/* Removed ml-4 */}
+                    <p className="text-sm">Inner loop: O(log n)</p> {/* Removed ml-4 */}
+                    <p className="text-sm"><strong>Total: O(n * log n) = O(n log n)</strong></p> {/* Removed ml-4 */}
                   </li>
                 </ul>
               </div>
